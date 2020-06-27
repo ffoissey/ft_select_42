@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:49:16 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:52:10 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
-static void	get_screen_info()
+static void	get_screen_info(void)
 {
 	t_env			*env;
 	struct winsize	win;
@@ -23,12 +35,9 @@ static void	get_screen_info()
 		env->screen_alert = true;
 	if (env->screen_alert == false)
 		env->pad = env->max_len;
-//	ft_printf("\n\n\n\nenv->elem_by_col = %d, env->elem_by_row = %d, env->pad = %d, env->row = %d, env->col = %d\n",
-//			env->elem_by_col, env->elem_by_row, env->pad, env->row, env->col);
-	
 }
 
-void	print_element(t_element *elem)
+static void	print_element(t_element *elem)
 {
 	t_env	*env;
 
@@ -44,23 +53,12 @@ void	print_element(t_element *elem)
 		tputs(env->tc[UNFOCUS], STDERR_FILENO, ft_putc);
 }
 
-void	display(void)
+static void	print_list(t_env *env, t_list *cur)
 {
-	t_env	*env;
-	t_list	*cur;
 	size_t	col;
 	size_t	row;
 	size_t	nb_elem;
 
-	env = get_env(GET);
-	tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
-	get_screen_info();
-	if (env->screen_alert == true)
-	{
-		ft_dprintf(STDERR_FILENO, SCREEN_ALERT);
-		return ;
-	}
-	cur = env->head;
 	col = 0;
 	row = 0;
 	nb_elem = 0;
@@ -77,6 +75,20 @@ void	display(void)
 		}
 		cur = cur->next;
 		if (cur != NULL)
-			tputs(tgoto(env->tc[MOVE_CURSOR], row, col), STDERR_FILENO, ft_putc);
+			tputs(tgoto(env->tc[MOVE_CURSOR], row, col),
+					STDERR_FILENO, ft_putc);
 	}
+}
+
+void		display(void)
+{
+	t_env	*env;
+
+	env = get_env(GET);
+	tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
+	get_screen_info();
+	if (env->screen_alert == true)
+		ft_dprintf(STDERR_FILENO, SCREEN_ALERT);
+	else
+		print_list(env, env->head);
 }

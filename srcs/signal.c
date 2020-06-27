@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:55:54 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:55:56 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 void	sigint_handler(int sig)
@@ -23,7 +35,7 @@ void	sigtstp_handler(int sig)
 	s[1] = '\0';
 	if (get_env(GET)->termmode_origin != NULL
 			&& get_env(GET)->termmode_current != NULL)
-	apply_termmode(ORIGIN);
+		apply_termmode(ORIGIN);
 	signal(SIGTSTP, SIG_DFL);
 	ioctl(STDIN_FILENO, TIOCSTI, s);
 }

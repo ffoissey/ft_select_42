@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termcaps.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:56:06 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:56:13 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 static void	init_termcaps_strings(void)
@@ -22,7 +34,7 @@ static void	init_termcaps_strings(void)
 	}
 }
 
-void	init_termcaps(void)
+void		init_termcaps(void)
 {
 	int		ret;
 	char	*term;

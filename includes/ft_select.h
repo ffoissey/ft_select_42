@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_select.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:59:13 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 23:00:55 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
@@ -5,6 +17,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
+# include <fcntl.h>
 # include <sys/ioctl.h>
 # include <stdbool.h>
 
@@ -33,12 +46,9 @@
 
 # define NB_KEY			10
 
-typedef void	(*t_key_process)(void);
-
-// UP - DOWN - LEFT - RIGHT - DEL - BACKSPACE - RETURN - ESC - TAB - SPACE
-
-
 # define ERR_MALLOC		"Malloc failed"
+# define ERR_OPEN		"Open failed"
+# define ERR_CLOSE		"Close failed"
 # define ERR_READ		"Read failed"
 # define ERR_IOCTL		"Ioctl failed"
 # define ERR_NOTATTY	"Not a tty"
@@ -68,7 +78,7 @@ enum	e_style
 	UNFOCUS
 };
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	t_list			*head;
 	t_list			*queue;
@@ -85,45 +95,48 @@ typedef struct	s_env
 	struct termios	*termmode_origin;
 	struct termios	*termmode_current;
 	bool			print;
-}				t_env;
+	t_vector		*screen;
+}					t_env;
 
-typedef struct	s_element
+typedef struct		s_element
 {
-	char		*str;
-	size_t		len;
-	size_t		id;
-	uint64_t	state;
-}				t_element;
+	char			*str;
+	size_t			len;
+	size_t			id;
+	uint64_t		state;
+}					t_element;
 
-t_env	*get_env(t_env *env);
-void	init_list(int ac, char **av);
+typedef void		(*t_key_process)(void);
 
-void	exit_routine(const char *err);
+t_env				*get_env(t_env *env);
+void				init_list(int ac, char **av);
 
-void	apply_termmode(const uint8_t flag);
-void	init_termmode(void);
-void	create_termmode(void);
+void				exit_routine(const char *err);
 
-void	init_termcaps(void);
+void				apply_termmode(const uint8_t flag);
+void				init_termmode(void);
+void				create_termmode(void);
 
-void	right_key(void);
-void	left_key(void);
-void	down_key(void);
-void	up_key(void);
-void	escape_key(void);
-void	return_key(void);
-void	space_key(void);
-void	del_key(void);
-void	backspace_key(void);
+void				init_termcaps(void);
 
-void	display(void);
+void				right_key(void);
+void				left_key(void);
+void				down_key(void);
+void				up_key(void);
+void				escape_key(void);
+void				return_key(void);
+void				space_key(void);
+void				del_key(void);
+void				backspace_key(void);
 
-void	get_max_size(void);
-void	del_element(void *data, size_t content_size);
-void	del_elem(void *data);
-void	set_focus(t_list *target, const uint8_t flag);
-int		ft_putc(int c);
-void	suppress_element(void);
-void	init_signal(void);
+void				display(void);
+
+void				get_max_size(void);
+void				del_element(void *data, size_t content_size);
+void				del_elem(void *data);
+void				set_focus(t_list *target, const uint8_t flag);
+int					ft_putc(int c);
+void				suppress_element(void);
+void				init_signal(void);
 
 #endif

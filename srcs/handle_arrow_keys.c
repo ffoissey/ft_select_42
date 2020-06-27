@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_arrow_keys.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:54:35 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:54:45 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 void	right_key(void)
@@ -79,8 +91,8 @@ void	down_key(void)
 	{
 		cur_id = ((t_element *)(((t_list *)(env->target))->content))->id;
 		target_id = cur_id + env->elem_by_row;
-		if (target_id >= env->nb_elem )
-			target_id = cur_id % env->elem_by_row; 
+		if (target_id >= env->nb_elem)
+			target_id = cur_id % env->elem_by_row;
 		while (target_id != cur_id)
 		{
 			right_key();

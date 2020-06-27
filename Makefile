@@ -6,7 +6,7 @@
 #    By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/11 17:23:00 by ffoissey          #+#    #+#              #
-#    Updated: 2020/04/14 17:06:44 by ffoissey         ###   ########.fr        #
+#    Updated: 2020/06/27 22:58:00 by ffoissey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,7 @@ PATH_SRCS += srcs/
 
 SRCS += ft_select.c
 SRCS += tools.c
+SRCS += free.c
 SRCS += display.c
 SRCS += termcaps.c
 SRCS += signal.c

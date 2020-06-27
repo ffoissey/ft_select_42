@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:54:53 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:55:44 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
-t_env	*get_env(t_env *env)
+t_env				*get_env(t_env *env)
 {
 	static t_env *keeper_env = NULL;
 
@@ -8,7 +20,6 @@ t_env	*get_env(t_env *env)
 		keeper_env = env;
 	return (keeper_env);
 }
-
 
 static t_element	create_new_element(char *str)
 {
@@ -24,7 +35,7 @@ static t_element	create_new_element(char *str)
 	return (elem);
 }
 
-void	init_list(int ac, char **av)
+void				init_list(int ac, char **av)
 {
 	t_env		*env;
 	t_list		*node;
@@ -34,8 +45,6 @@ void	init_list(int ac, char **av)
 	env = get_env(GET);
 	if (ac == 1)
 		exit_routine(ERR_MISS_ARG);
-	if (isatty(STDIN_FILENO) == false)
-		exit_routine(ERR_NOTATTY);
 	i = 1;
 	while (i < ac)
 	{

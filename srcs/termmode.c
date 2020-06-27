@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termmode.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/27 22:56:56 by ffoissey          #+#    #+#             */
+/*   Updated: 2020/06/27 22:56:57 by ffoissey         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
-void		create_termmode(void)
+static void	create_termmode(void)
 {
 	struct termios	term;
 	t_env			*env;
@@ -15,7 +27,8 @@ void		create_termmode(void)
 		term.c_lflag |= ISIG;
 		term.c_cc[VMIN] = 1;
 		term.c_cc[VTIME] = 0;
-		env->termmode_current = (struct termios *)malloc(sizeof(struct termios));
+		env->termmode_current =
+			(struct termios *)malloc(sizeof(struct termios));
 		if (env->termmode_current != NULL)
 			ft_memcpy(env->termmode_current, &term, sizeof(struct termios));
 	}
@@ -38,7 +51,7 @@ void		apply_termmode(const uint8_t flag)
 		exit_routine("termmode: unexpected error");
 }
 
-void	init_termmode(void)
+void		init_termmode(void)
 {
 	create_termmode();
 	apply_termmode(CURRENT);
