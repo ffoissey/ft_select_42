@@ -41,41 +41,52 @@ void	left_key(void)
 void	up_key(void)
 {
 	t_env	*env;
-	t_list	*run;
-	size_t	target_id;
+	int		target_id;
+	int		cur_id;
 
 	env = get_env(GET);
-	if (env->nb_elem < 2)
+	if (env->nb_elem < 2 || env->elem_by_col < 2)
 		env->target = env->head;
 	else
 	{
-		target_id = (((t_element *)(((t_list *)(env->target))->content))->id
-					+ env->elem_by_row) % env->nb_elem;
-		run = env->head;
-		while (((t_element *)(run->content))->id != target_id)
-			run = run->next;
-		env->target = run;
+		cur_id = ((t_element *)(((t_list *)(env->target))->content))->id;
+		target_id = (int)cur_id - (int)env->elem_by_row;
+		if (target_id < 0)
+			target_id = (env->nb_elem - 1)
+				- ((env->nb_elem - 1) % env->elem_by_row) + cur_id;
+		if (target_id >= (int)env->nb_elem)
+			target_id -= env->elem_by_row;
+		while (target_id != cur_id)
+		{
+			left_key();
+			cur_id = ((t_element *)(((t_list *)(env->target))->content))->id;
+			if (cur_id % env->nb_elem == target_id % env->nb_elem)
+				break ;
+		}
 	}
 }
 
 void	down_key(void)
 {
 	t_env	*env;
-	t_list	*run;
 	size_t	target_id;
+	size_t	cur_id;
 
 	env = get_env(GET);
-	if (env->nb_elem < 2)
+	if (env->nb_elem < 2 || env->elem_by_col < 2)
 		env->target = env->head;
 	else
 	{
-		target_id = (((t_element *)(((t_list *)(env->target))->content))->id
-					+ env->elem_by_row);
-		if (target_id < 0)
-			target_id = env->nb_elem + target_id;
-		run = env->head;
-		while (((t_element *)(run->content))->id != target_id)
-			run = run->next;
-		env->target = run;
+		cur_id = ((t_element *)(((t_list *)(env->target))->content))->id;
+		target_id = cur_id + env->elem_by_row;
+		if (target_id >= env->nb_elem )
+			target_id = cur_id % env->elem_by_row; 
+		while (target_id != cur_id)
+		{
+			right_key();
+			cur_id = ((t_element *)(((t_list *)(env->target))->content))->id;
+			if (cur_id % env->nb_elem == target_id % env->nb_elem)
+				break ;
+		}
 	}
 }

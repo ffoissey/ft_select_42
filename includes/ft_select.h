@@ -14,6 +14,8 @@
 # define UNSET	0
 # define SET	1
 
+# define RESET_QUEUE	1
+
 # define NONE		0x00
 # define SELECTED	0x01
 # define ONFOCUS	0x02
@@ -112,6 +114,7 @@ void	escape_key(void);
 void	return_key(void);
 void	space_key(void);
 void	del_key(void);
+void	backspace_key(void);
 
 void	display(void);
 
@@ -120,5 +123,6 @@ void	del_element(void *data, size_t content_size);
 void	del_elem(void *data);
 void	set_focus(t_list *target, const uint8_t flag);
 int		ft_putc(int c);
+void	suppress_element(void);
 
 #endif

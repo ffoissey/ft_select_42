@@ -4,7 +4,7 @@ static void	apply_key(unsigned int mask)
 {
 	static t_key_process		key_process[NB_KEY] = {up_key, down_key,
 									left_key, right_key, space_key, escape_key,
-									del_key, del_key, return_key, left_key};
+									backspace_key, del_key, return_key, left_key};
 	static const unsigned int	key_code[NB_KEY] = {KEY_UP, KEY_DOWN, KEY_LEFT,
 									KEY_RIGHT, KEY_SPACE, KEY_ESCAPE,
 									KEY_BACKSPACE, KEY_DEL,	KEY_RETURN,

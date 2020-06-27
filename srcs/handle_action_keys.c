@@ -1,36 +1,34 @@
 #include "ft_select.h"
 
-void	del_key(void)
+void	backspace_key(void)
 {
-	t_env	*env;
-	t_list	*run;
-	bool	reorder;
+	t_env		*env;
+	t_list		*next_target;
 
 	env = get_env(GET);
-	if (env->target == env->queue)
+	next_target = env->target->next;
+	suppress_element();
+	if (next_target == env->head)
+		env->target = env->head;
+	else
 	{
-		reorder = false;
-		run = env->head;
-		while (run != NULL)
-		{
-			if (run->next == env->target)
-			{
-				reorder = true;
-				if (run->next == NULL)
-					env->queue = run;
-				run = run->next;
-				continue ;
-			}
-			if (reorder == true)
-				((t_element *)(run->content))->id--;
-			run = run->next;
-		}
+		env->target = next_target;
+		left_key();
 	}
-	ft_lstdelnode(&env->head, env->target->content, del_elem);
-	env->nb_elem--;
-	if (env->nb_elem == 0)
-		exit_routine(OK);
-	left_key();
+}
+
+void	del_key(void)
+{
+	t_env		*env;
+	t_list		*next_target;
+
+	env = get_env(GET);
+	next_target = env->target->next;
+	suppress_element();
+	if (next_target == NULL)
+		env->target = env->queue;
+	else
+		right_key();
 }
 
 void	space_key(void)

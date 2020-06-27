@@ -17,11 +17,13 @@ static void	get_screen_info()
 	if (env->col < env->max_len || env->elem_by_row == 0)
 		env->screen_alert = true;
 	else
-		env->elem_by_col = env->elem_by_row / env->elem_by_row;
+		env->elem_by_col = env->row / env->elem_by_row;
 	if (env->elem_by_col > env->row)
 		env->screen_alert = true;
 	if (env->screen_alert == false)
 		env->pad = env->max_len;
+//	ft_printf("\n\n\n\nenv->elem_by_col = %d, env->elem_by_row = %d, env->pad = %d, env->row = %d, env->col = %d\n",
+//			env->elem_by_col, env->elem_by_row, env->pad, env->row, env->col);
 	
 }
 
@@ -63,7 +65,7 @@ void	display(void)
 	{
 		print_element(cur->content);
 		row += env->pad;
-		if (row >= env->row)
+		if (row >= env->col ||row + env->elem_by_row >= env->col)
 		{
 			row = 0;
 			col++;

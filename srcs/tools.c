@@ -11,6 +11,38 @@ void	del_elem(void *data)
 	del_element(data, 0);
 }
 
+void	reorder_element()
+{
+	t_env		*env;
+	t_list		*lst;
+	t_element	*elem;
+	size_t		id;
+
+	id = 0;
+	env = get_env(GET);
+	lst = env->head;
+	while (lst != NULL)
+	{
+		elem = lst->content;
+		elem->id = id++;
+		if (lst->next == NULL)
+			env->queue = lst;
+		lst = lst->next;
+	}
+}
+
+void	suppress_element(void)
+{
+	t_env	*env;
+
+	env = get_env(GET);
+	ft_lstdelnode(&env->head, env->target->content, del_elem);
+	reorder_element();
+	env->nb_elem--;
+	if (env->nb_elem == 0)
+		exit_routine(OK);
+}
+
 int		ft_putc(int c)
 {
 	return ((int)write(STDERR_FILENO, &c, 1));
