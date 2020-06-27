@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 22:52:50 by ffoissey          #+#    #+#             */
-/*   Updated: 2020/06/27 23:08:07 by ffoissey         ###   ########.fr       */
+/*   Updated: 2020/06/27 23:11:38 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			main(int ac, char **av)
 
 	ft_bzero(&env, sizeof(t_env));
 	get_env(&env);
-	if (isatty(STDIN_FILENO) == false)
+	if (isatty(STDIN_FILENO) == false || isatty(STDERR_FILENO) == false)
 		exit_routine(ERR_NOTATTY);
 	init_list(ac, av);
 	init_termcaps();
