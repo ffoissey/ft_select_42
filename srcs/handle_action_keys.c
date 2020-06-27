@@ -35,12 +35,14 @@ void	del_key(void)
 
 void	space_key(void)
 {
+	t_list		*node;
 	t_element	*target;
 
-	target = (t_element *)(get_env(GET)->target);
-	if (target != NULL)
+	node = (t_list *)(get_env(GET)->target);
+	if (node != NULL && node->content != NULL)
 	{
-		if (target->state & ONFOCUS)
+		target = (t_element *)node->content;
+		if (target->state & SELECTED)
 			target->state &= ~SELECTED;
 		else
 			target->state |= SELECTED;

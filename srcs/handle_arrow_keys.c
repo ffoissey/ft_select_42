@@ -27,9 +27,14 @@ void	left_key(void)
 	else
 	{
 		run = env->head;
-		while (run->next != env->target && run->next != NULL)
-			run = run->next;
-		env->target = (run == env->head) ? env->queue : run;
+		if (run == env->target)
+			env->target = env->queue;
+		else
+		{
+			while (run->next != env->target && run->next != NULL)
+				run = run->next;
+			env->target = run;
+		}
 	}
 }
 

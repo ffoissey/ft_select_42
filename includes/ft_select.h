@@ -39,6 +39,7 @@ typedef void	(*t_key_process)(void);
 # define ERR_MALLOC		"Malloc failed"
 # define ERR_READ		"Read failed"
 # define ERR_IOCTL		"Ioctl failed"
+# define ERR_NOTATTY	"Not a tty"
 # define ERR_TERMCAP	"All termcaps could not be initialized"
 # define ERR_NONPRINT	"Arguments should contain only printable char"
 # define ERR_MISS_ARG	"./ft_select needs at least one argument"
@@ -51,13 +52,18 @@ typedef void	(*t_key_process)(void);
 # define ORIGIN		0
 # define CURRENT	1
 
-# define NB_TC	3
+# define NB_TC	8
 
 enum	e_style
 {
 	CLEAR,
 	MOVE_CURSOR,
-	NEXT_LINE,
+	INVISIBLE_CURSOR,
+	VISIBLE_CURSOR,
+	SELECT,
+	UNSELECT,
+	FOCUS,
+	UNFOCUS
 };
 
 typedef struct	s_env

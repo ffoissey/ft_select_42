@@ -15,7 +15,7 @@ static t_element	create_new_element(char *str)
 	t_element		elem;
 	static size_t	id = 0;
 
-	if (ft_strcheck(elem.str, ft_isprint) == false)
+	if (ft_strcheck(str, ft_isprint) == false)
 		exit_routine(ERR_NONPRINT);
 	elem.str = str;
 	elem.id = id++;
@@ -34,6 +34,8 @@ void	init_list(int ac, char **av)
 	env = get_env(GET);
 	if (ac == 1)
 		exit_routine(ERR_MISS_ARG);
+	if (isatty(STDIN_FILENO) == false)
+		exit_routine(ERR_NOTATTY);
 	i = 1;
 	while (i < ac)
 	{

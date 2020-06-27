@@ -1,0 +1,9 @@
+#Swap
+.*.sw*
+
+#Exec
+ft_select
+
+#Obj
+objs
+*.o

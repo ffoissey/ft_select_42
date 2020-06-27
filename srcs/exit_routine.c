@@ -9,7 +9,7 @@ static void	print_onfocus(t_list *lst)
 	while (lst != NULL)
 	{
 		element = (t_element *)lst->content;
-		if (element != NULL && element->state == ONFOCUS)
+		if (element != NULL && element->state == SELECTED)
 		{
 			if (output == NULL)
 			{
@@ -33,6 +33,7 @@ void	exit_routine(const char *err)
 	t_env *env;
 
 	env = get_env(GET);
+	tputs(env->tc[VISIBLE_CURSOR], STDERR_FILENO, ft_putc);
 	if (err != NULL)
 		ft_dprintf(STDERR_FILENO, "ERROR: %s\n", err);
 	else
@@ -45,6 +46,5 @@ void	exit_routine(const char *err)
 	free(env->termmode_origin);
 	free(env->termmode_current);
 	ft_lstdel(&env->head, del_element);
-	(void)env;
 	exit(err == NULL ? EXIT_SUCCESS : EXIT_FAILURE);
 }

@@ -44,5 +44,6 @@ void	get_max_size(void)
 			len = elem->len;
 		cur = cur->next;
 	}
+	env->max_len = len;
 }
 

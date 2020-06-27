@@ -8,7 +8,12 @@ static void	init_termcaps_strings(void)
 	tc = get_env(GET)->tc;
 	tc[CLEAR] = tgetstr("cl", NULL);
 	tc[MOVE_CURSOR] = tgetstr("cm", NULL);
-	tc[NEXT_LINE] = tgetstr("do", NULL);
+	tc[INVISIBLE_CURSOR] = tgetstr("vi", NULL);
+	tc[VISIBLE_CURSOR] = tgetstr("ve", NULL);
+	tc[SELECT] = tgetstr("so", NULL);
+	tc[UNSELECT] = tgetstr("se", NULL);
+	tc[UNFOCUS] = tgetstr("ue", NULL);
+	tc[FOCUS] = tgetstr("us", NULL);
 	i = 0;
 	while (i < NB_TC)
 	{
