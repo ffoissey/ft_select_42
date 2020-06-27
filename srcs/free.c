@@ -6,24 +6,44 @@
 /*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 22:57:37 by ffoissey          #+#    #+#             */
-/*   Updated: 2020/06/27 22:57:49 by ffoissey         ###   ########.fr       */
+/*   Updated: 2020/06/27 23:04:40 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void	del_element(void *data, size_t content_size)
+void		del_element(void *data, size_t content_size)
 {
 	(void)content_size;
 	free(data);
 }
 
-void	del_elem(void *data)
+void		del_elem(void *data)
 {
 	del_element(data, 0);
 }
 
-void	suppress_element(void)
+static void	reorder_element(void)
+{
+	t_env		*env;
+	t_list		*lst;
+	t_element	*elem;
+	size_t		id;
+
+	id = 0;
+	env = get_env(GET);
+	lst = env->head;
+	while (lst != NULL)
+	{
+		elem = lst->content;
+		elem->id = id++;
+		if (lst->next == NULL)
+			env->queue = lst;
+		lst = lst->next;
+	}
+}
+
+void		suppress_element(void)
 {
 	t_env	*env;
 

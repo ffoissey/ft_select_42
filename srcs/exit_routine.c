@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 22:52:27 by ffoissey          #+#    #+#             */
-/*   Updated: 2020/06/27 22:52:35 by ffoissey         ###   ########.fr       */
+/*   Updated: 2020/06/27 23:06:10 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void		exit_routine(const char *err)
 
 	env = get_env(GET);
 	tputs(env->tc[VISIBLE_CURSOR], STDERR_FILENO, ft_putc);
-	vct_print(env->screen);
 	if (err != NULL)
 		ft_dprintf(STDERR_FILENO, "ERROR: %s\n", err);
 	else if (env->print == true)

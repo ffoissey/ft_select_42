@@ -6,7 +6,7 @@
 /*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 22:59:13 by ffoissey          #+#    #+#             */
-/*   Updated: 2020/06/27 23:00:55 by ffoissey         ###   ########.fr       */
+/*   Updated: 2020/06/27 23:06:28 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ typedef struct		s_env
 	t_list			*head;
 	t_list			*queue;
 	t_list			*target;
-	bool			screen_alert;
+	struct termios	*termmode_origin;
+	struct termios	*termmode_current;
+	char			*tc[NB_TC];
 	size_t			elem_by_row;
 	size_t			elem_by_col;
 	size_t			col;
@@ -91,11 +93,9 @@ typedef struct		s_env
 	size_t			pad;
 	size_t			max_len;
 	size_t			nb_elem;
-	char			*tc[NB_TC];
-	struct termios	*termmode_origin;
-	struct termios	*termmode_current;
+	bool			screen_alert;
 	bool			print;
-	t_vector		*screen;
+	char			padding[6];
 }					t_env;
 
 typedef struct		s_element
@@ -115,7 +115,6 @@ void				exit_routine(const char *err);
 
 void				apply_termmode(const uint8_t flag);
 void				init_termmode(void);
-void				create_termmode(void);
 
 void				init_termcaps(void);
 

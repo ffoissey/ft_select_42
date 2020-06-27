@@ -6,31 +6,11 @@
 /*   By: ffoissey <ffoissey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/27 22:58:19 by ffoissey          #+#    #+#             */
-/*   Updated: 2020/06/27 22:58:56 by ffoissey         ###   ########.fr       */
+/*   Updated: 2020/06/27 23:04:27 by ffoissey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
-
-void	reorder_element(void)
-{
-	t_env		*env;
-	t_list		*lst;
-	t_element	*elem;
-	size_t		id;
-
-	id = 0;
-	env = get_env(GET);
-	lst = env->head;
-	while (lst != NULL)
-	{
-		elem = lst->content;
-		elem->id = id++;
-		if (lst->next == NULL)
-			env->queue = lst;
-		lst = lst->next;
-	}
-}
 
 int		ft_putc(int c)
 {
