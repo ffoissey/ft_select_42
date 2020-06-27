@@ -127,6 +127,7 @@ SRCS += ft_select.c
 SRCS += tools.c
 SRCS += display.c
 SRCS += termcaps.c
+SRCS += signal.c
 SRCS += termmode.c
 SRCS += init.c
 SRCS += handle_action_keys.c

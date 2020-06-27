@@ -54,10 +54,12 @@ void	escape_key(void)
 
 	env = get_env(GET);
 	ft_lstdel(&env->head, del_element);
+	tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
 	exit_routine(OK);
 }
 
 void	return_key(void)
 {
+	get_env(GET)->print = true;
 	exit_routine(OK);
 }

@@ -40,7 +40,10 @@ void	suppress_element(void)
 	reorder_element();
 	env->nb_elem--;
 	if (env->nb_elem == 0)
+	{
+		tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
 		exit_routine(OK);
+	}
 }
 
 int		ft_putc(int c)

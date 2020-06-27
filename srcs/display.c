@@ -18,7 +18,8 @@ static void	get_screen_info()
 		env->screen_alert = true;
 	else
 		env->elem_by_col = env->row / env->elem_by_row;
-	if (env->elem_by_col > env->row)
+	if (env->elem_by_col > env->row
+		|| env->elem_by_row * env->row < env->nb_elem)
 		env->screen_alert = true;
 	if (env->screen_alert == false)
 		env->pad = env->max_len;
@@ -49,6 +50,7 @@ void	display(void)
 	t_list	*cur;
 	size_t	col;
 	size_t	row;
+	size_t	nb_elem;
 
 	env = get_env(GET);
 	tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
@@ -61,16 +63,20 @@ void	display(void)
 	cur = env->head;
 	col = 0;
 	row = 0;
+	nb_elem = 0;
 	while (cur != NULL)
 	{
 		print_element(cur->content);
 		row += env->pad;
-		if (row >= env->col ||row + env->elem_by_row >= env->col)
+		nb_elem++;
+		if (row >= env->col || nb_elem == env->elem_by_row)
 		{
 			row = 0;
+			nb_elem = 0;
 			col++;
 		}
-		tputs(tgoto(env->tc[MOVE_CURSOR], row, col), STDERR_FILENO, ft_putc);
 		cur = cur->next;
+		if (cur != NULL)
+			tputs(tgoto(env->tc[MOVE_CURSOR], row, col), STDERR_FILENO, ft_putc);
 	}
 }

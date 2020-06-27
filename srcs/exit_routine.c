@@ -36,7 +36,7 @@ void	exit_routine(const char *err)
 	tputs(env->tc[VISIBLE_CURSOR], STDERR_FILENO, ft_putc);
 	if (err != NULL)
 		ft_dprintf(STDERR_FILENO, "ERROR: %s\n", err);
-	else
+	else if (env->print == true)
 	{
 		tputs(env->tc[CLEAR], STDERR_FILENO, ft_putc);
 		print_onfocus(env->head);

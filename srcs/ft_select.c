@@ -54,6 +54,7 @@ int		main(int ac, char **av)
 	init_list(ac, av);
 	init_termcaps();
 	init_termmode();
+	init_signal();
 	read_loop();	
 	exit_routine(OK);
 	return (EXIT_SUCCESS);

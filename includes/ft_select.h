@@ -81,10 +81,10 @@ typedef struct	s_env
 	size_t			pad;
 	size_t			max_len;
 	size_t			nb_elem;
-	uint64_t		err;
 	char			*tc[NB_TC];
 	struct termios	*termmode_origin;
 	struct termios	*termmode_current;
+	bool			print;
 }				t_env;
 
 typedef struct	s_element
@@ -124,5 +124,6 @@ void	del_elem(void *data);
 void	set_focus(t_list *target, const uint8_t flag);
 int		ft_putc(int c);
 void	suppress_element(void);
+void	init_signal(void);
 
 #endif
